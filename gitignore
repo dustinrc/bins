@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cmd="curl -s http://www.gitignore.io/api/$@"
+
+if [[ $1 = "list" ]]; then
+  $cmd | tr ',' '\n' | while read word; do
+    echo ${word}
+  done
+elif [[ "$@" ]] && [[ $1 != "help" ]]; then
+  echo "# types: $@"
+  echo "# date:  $(date +%Y%m%d)"
+  echo
+fi
+
+$cmd

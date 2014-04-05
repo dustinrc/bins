@@ -1,0 +1,14 @@
+#!/bin/bash
+#  Assumes you have ssh keys already setup.
+
+host=$1
+username=${2-`whoami`}
+thatport=${3-2222}
+thisport=${4-22}
+
+while true; do
+  echo "Connecting..."
+  ssh ${username}@${host} -R 127.0.0.1:${thatport}:127.0.0.1:${thisport}
+  echo -e "Disconnected.\n"
+  sleep 30
+done
