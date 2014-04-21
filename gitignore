@@ -10,6 +10,7 @@ elif [[ "$@" ]] && [[ $1 != "help" ]]; then
   echo "# types: $@"
   echo "# date:  $(date +%Y%m%d)"
   echo
+  $cmd
+else
+  $cmd
 fi
-
-$cmd
