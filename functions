@@ -1,0 +1,21 @@
+function randstr()
+{
+  cat /dev/urandom | tr -dc ${2:-'a-zA-Z0-9'} | fold -w ${1:-32} | head -n 1
+}
+
+function randnum()
+{
+  num=$RANDOM
+  if [[ $# -eq 0 ]]; then
+    max=10
+  else
+    max=$1
+  fi
+  (( num = $num % ($max + 1) ))
+  if [[ $# -gt 1 ]]; then
+    if [[ $num -lt $2 ]]; then
+      num=$2
+    fi
+  fi
+  echo $num
+}
