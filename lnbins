@@ -1,0 +1,11 @@
+#!/bin/bash
+
+src=${2-"${HOME}/dev/bins"}
+dst=${3-"${HOME}/bin"}
+lnopts=${4-"-rsvt ${dst}"}
+
+mkdir -p ${dst}
+
+for path in $1; do
+  find -L "${src}/${path}" -type f -exec ln ${lnopts} {} \;
+done
