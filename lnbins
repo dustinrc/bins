@@ -5,8 +5,12 @@ dst=${3-"${HOME}/bin"}
 
 mkdir -p ${dst}
 
+ln -rs ${dst} tmp_lnbins 2> /dev/null
+old_args=$?
+(( ${old_args} )) || rm tmp_lnbins
+
 for path in $1; do
-  if [[ $(uname) = "Darwin" ]]; then
+  if (( ${old_args} )); then
     pushd ${dst} > /dev/null
     find -L "${src}/${path}" -type f -exec basename {} \; | \
       xargs -I % ln -sv "${src}/%"
