@@ -3,34 +3,34 @@
 args=$@
 
 function old_args() {
-  echo $(head -1 .gitignore | sed -n 's/# types: \(.*\)$/\1/p')
+    echo $(head -1 .gitignore | sed -n 's/# types: \(.*\)$/\1/p')
 }
 
 function cmd() {
-  echo "curl -s http://www.gitignore.io/api/${args}"
+    echo "curl -s http://www.gitignore.io/api/${args}"
 }
 
 function output() {
-  echo "# types: ${args}"
-  echo "# date:  $(date +%Y%m%d)"
-  echo
-  $(cmd)
+    echo "# types: ${args}"
+    echo "# date:    $(date +%Y%m%d)"
+    echo
+    $(cmd)
 }
 
 if [[ $1 = "list" ]]; then
-  $(cmd) | tr ',' '\n' | while read word; do
-    echo ${word}
-  done
+    $(cmd) | tr ',' '\n' | while read word; do
+        echo ${word}
+    done
 elif [[ $1 = "check" ]]; then
-  args=$(old_args)
-  cat .gitignore | tail -n +4 > .gitignore.tmp
-  $(cmd) | diff --label old --label new -sy .gitignore.tmp -
-  rm .gitignore.tmp
+    args=$(old_args)
+    cat .gitignore | tail -n +4 > .gitignore.tmp
+    $(cmd) | diff --label old --label new -sy .gitignore.tmp -
+    rm .gitignore.tmp
 elif [[ $1 = "update" ]]; then
-  args=$(old_args)
-  output
+    args=$(old_args)
+    output
 elif [[ "$@" ]] && [[ $1 != "help" ]]; then
-  output
+    output
 else
-  $(cmd)
+    $(cmd)
 fi

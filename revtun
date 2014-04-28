@@ -6,8 +6,8 @@ thatport=${2-2222}
 thisport=${3-22}
 
 while true; do
-  echo "Connecting..."
-  ssh ${host} -R 127.0.0.1:${thatport}:127.0.0.1:${thisport}
-  echo -e "Disconnected.\n"
-  sleep 30
+    echo "Connecting..."
+    ssh ${host} -R 127.0.0.1:${thatport}:127.0.0.1:${thisport}
+    echo -e "Disconnected.\n"
+    sleep 30
 done

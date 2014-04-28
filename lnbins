@@ -10,12 +10,12 @@ old_args=$?
 (( ${old_args} )) || rm tmp_lnbins
 
 for path in $1; do
-  if (( ${old_args} )); then
-    pushd ${dst} > /dev/null
-    find -L "${src}/${path}" -type f -exec basename {} \; | \
-      xargs -I % ln -sv "${src}/%"
-    popd > /dev/null
-  else
-    find -L "${src}/${path}" -type f -exec ln -rsvt ${dst} {} \;
-  fi
+    if (( ${old_args} )); then
+        pushd ${dst} > /dev/null
+        find -L "${src}/${path}" -type f -exec basename {} \; | \
+            xargs -I % ln -sv "${src}/%"
+        popd > /dev/null
+    else
+        find -L "${src}/${path}" -type f -exec ln -rsvt ${dst} {} \;
+    fi
 done
