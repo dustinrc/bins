@@ -7,10 +7,10 @@ mkdir -p ${dst}
 
 for path in $1; do
   if [[ $(uname) = "Darwin" ]]; then
-    pushd ${dst}
+    pushd ${dst} > /dev/null
     find -L "${src}/${path}" -type f -exec basename {} \; | \
-      xargs -I % ln -sv ${src}/%
-    popd
+      xargs -I % ln -sv "${src}/%"
+    popd > /dev/null
   else
     find -L "${src}/${path}" -type f -exec ln -rsvt ${dst} {} \;
   fi
