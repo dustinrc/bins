@@ -10,9 +10,9 @@ given bin directory. The following will install all Linux related links:
 ```
 git clone https://github.com/dustinrc/bins
 cd bins
-./lnbins _linux $(pwd) $HOME/bin
+./lnbins linux $(pwd) $HOME/bin
 ```
 
-Similarly, use `_osx` and `_vm` for OS X and [DigitalOcean] VMs, respectively.
+Similarly, use `osx` and `vm` for OS X and [DigitalOcean] VMs, respectively.
 
 [DigitalOcean]: https://www.digitalocean.com/?refcode=114813747e5f
