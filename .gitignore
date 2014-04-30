@@ -1,5 +1,5 @@
-# types: linux,vim
-# date:  20140405
+# types: linux,osx,vim
+# date:  201404301429UTC
 
 # Created by http://www.gitignore.io
 
@@ -8,6 +8,29 @@
 
 # KDE directory preferences
 .directory
+
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
 
 ### vim ###
