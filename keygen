@@ -1,0 +1,24 @@
+#!/bin/bash
+
+remote=${1-""}
+name=${2-`whoami`}
+location=${3-`hostname`}
+directory=${4-"${HOME}/.ssh"}
+passphrase=${5-""}
+
+description="${name}@${location}"
+output="${directory}/${description}"
+puboutput="${output}.pub"
+
+bits=4096
+type="rsa"
+
+[ -f ${puboutput} ] \
+    && echo "key already exists" \
+    || ssh-keygen -b ${bits} -t ${type} -P "${passphrase}" -C "${description}" -f "${output}"
+
+[ ${remote} ] && [ `which ssh-copy-id` ] \
+    && ssh-copy-id -i ${puboutput} ${remote} \
+    || echo "cannot copy to remote"
+
+echo "To use your key: 'ssh -i ${output} ${remote}'"
