@@ -28,8 +28,8 @@ case "${cmd}" in
         fi
         ;;
     set)
-        if [ ! -L ${path} ]; then
-            echo "${path} exists and is a file, will not overwrite"
+        if [ -f ${path} ] && [ ! -L ${path} ]; then
+            echo "${path} exists and is not a link, will not overwrite"
             exit ${not_link}
         else
             pushd ${ssh_dir} > /dev/null
