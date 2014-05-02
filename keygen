@@ -2,7 +2,7 @@
 
 remote=${1-""}
 name=${2-`whoami`}
-location=${3-`hostname`}
+location=${3-`hostname -s`}
 directory=${4-"${HOME}/.ssh"}
 passphrase=${5-""}
 
