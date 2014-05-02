@@ -1,0 +1,45 @@
+#!/bin/bash
+
+cmd=${1-"help"}
+tgt=${2-`whoami`@`hostname -s`}
+
+ssh_dir="${HOME}/.ssh"
+path="${ssh_dir}/id_rsa"
+
+ok=0
+unknown_issue=1
+not_set=2
+not_link=3
+
+case "${cmd}" in
+    show)
+        if [ ! -e ${path} ]; then
+            echo "not set"
+            exit ${not_set}
+        elif [ ! -L ${path} ]; then
+            echo "${path} exists and is not a link, will not overwrite"
+            exit ${not_link}
+        elif [ -L ${path} ]; then
+            readlink ${path} | xargs basename
+            exit ${ok}
+        else
+            echo "unknown issue"
+            exit ${unknown_issue}
+        fi
+        ;;
+    set)
+        if [ ! -L ${path} ]; then
+            echo "${path} exists and is a file, will not overwrite"
+            exit ${not_link}
+        else
+            pushd ${ssh_dir} > /dev/null
+            ln -sf ${tgt} id_rsa
+            popd > /dev/null
+            exit ${ok}
+        fi
+        ;;
+    *)
+        echo "  show"
+        echo "  set <id>"
+        ;;
+esac
