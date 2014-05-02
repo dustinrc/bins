@@ -6,7 +6,9 @@ location=${3-`hostname -s`}
 directory=${4-"${HOME}/.ssh"}
 passphrase=${5-""}
 
-description="${name}@${location}"
+[ ${location} ] \
+    && description="${name}@${location}" \
+    || description="${name}"
 output="${directory}/${description}"
 puboutput="${output}.pub"
 
