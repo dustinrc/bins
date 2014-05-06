@@ -1,0 +1,21 @@
+function _sshid() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="set show"
+
+    case "${prev}" in
+    set)
+        COMPREPLY=( $(compgen -f "${HOME}/.ssh/${cur}" \
+                      | xargs -n 1 basename \
+                      | grep -v -E '*.pub') )
+        return 0
+        ;;
+    *)
+    ;;
+    esac
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+complete -F _sshid sshid
