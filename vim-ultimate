@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#  Easy spf13-vim clean/install (not yet) or check/update.
+
+cmd=${1-""}
+
+defaultdir="${HOME}/.spf13-vim-3"
+
+function gotodir() {
+    pushd ${defaultdir} > /dev/null
+    if [ "$(pwd)" != "${defaultdir}" ]; then
+        echo "Nothing there! Run the install command first."
+        exit 1
+    fi
+}
+
+case "${cmd}" in
+    check)
+        gotodir && \
+        git remote update && \
+        git status -uno && \
+        popd > /dev/null
+        exit "$?"
+        ;;
+    update)
+        gotodir && \
+        git pull && \
+        vim +BundleInstall! +BundleClean +qall && \
+        popd > /dev/null
+        exit "$?"
+        ;;
+    *)
+        echo "  check"
+        echo "  update"
+        ;;
+esac
+
