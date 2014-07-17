@@ -28,7 +28,7 @@ case "${cmd}" in
         rm -rf ${toremove}
         ;;
     install)
-        bash <(curl -L https://j.mp/spf13-vim3) && \
+        sh <(curl -L https://j.mp/spf13-vim3) && \
         echo "let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'ruby', 'python', 'go', 'javascript', 'html', 'misc', 'writing' ]" > ${basedir}/.vimrc.before.local && \
         echo 'let g:go_fmt_command = "gofmt"' > ${basedir}/.vimrc.local && \
         vim +BundleInstall! +qall
