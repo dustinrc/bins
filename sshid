@@ -38,8 +38,14 @@ case "${cmd}" in
             exit ${ok}
         fi
         ;;
+    finger)
+        pushd ${ssh_dir} > /dev/null
+        ssh-keygen -lf ${tgt}
+        popd > /dev/null
+        ;;
     *)
         echo "  show"
         echo "  set <id>"
+        echo "  finger <id>"
         ;;
 esac

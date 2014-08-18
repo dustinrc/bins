@@ -3,10 +3,10 @@ function _sshid() {
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="set show"
+    opts="set show finger"
 
     case "${prev}" in
-    set)
+    set | finger)
         COMPREPLY=( $(compgen -f "${HOME}/.ssh/${cur}" \
                       | xargs -n 1 basename \
                       | grep -v -E '*.pub') )
