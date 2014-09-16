@@ -7,7 +7,7 @@ function old_args() {
 }
 
 function cmd() {
-    echo "curl -s http://www.gitignore.io/api/${args}"
+    echo "curl -L -s http://www.gitignore.io/api/${args}"
 }
 
 function output() {
