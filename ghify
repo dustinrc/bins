@@ -1,0 +1,6 @@
+#!/bin/bash
+
+repo=${1}
+
+git remote add origin ${repo}
+git push -u origin master
