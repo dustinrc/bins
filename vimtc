@@ -1,0 +1,6 @@
+#!/bin/bash
+# vimtc -- vim tab the code
+
+ext=${1-go}
+
+find . -type f -iname "*.${ext}" -exec vim -p {} +
