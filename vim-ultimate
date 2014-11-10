@@ -28,7 +28,7 @@ case "${cmd}" in
         rm -rf ${toremove}
         ;;
     install)
-        sh <(curl -L https://j.mp/spf13-vim3) && \
+        sh <(curl -k -L https://j.mp/spf13-vim3) && \
         echo "let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'ruby', 'python', 'go', 'javascript', 'html', 'misc', 'writing' ]" > ${basedir}/.vimrc.before.local && \
         # is vim-go flip-flopping on the formatter it uses? stick to goimports please...
         echo 'let g:go_fmt_command = "goimports"' > ${basedir}/.vimrc.local && \
