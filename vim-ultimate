@@ -30,8 +30,9 @@ case "${cmd}" in
     install)
         sh <(curl -L https://j.mp/spf13-vim3) && \
         echo "let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'ruby', 'python', 'go', 'javascript', 'html', 'misc', 'writing' ]" > ${basedir}/.vimrc.before.local && \
-        # let vim-go use goimports as the default, but may need to install Mercurial
-        #echo 'let g:go_fmt_command = "gofmt"' > ${basedir}/.vimrc.local && \
+        # is vim-go flip-flopping on the formatter it uses? stick to goimports please...
+        echo 'let g:go_fmt_command = "goimports"' > ${basedir}/.vimrc.local && \
+        # will need mercuiral installed for goimports to install
         echo -e "Mercuial is $(which hg >/dev/null 2>&1 && echo '' || echo 'not ')installed." && \
         vim +BundleInstall! +qall
         exit "$?"
