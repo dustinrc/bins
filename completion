@@ -9,7 +9,13 @@ function _sshid() {
     set | finger)
         COMPREPLY=( $(compgen -f "${HOME}/.ssh/${cur}" \
                       | xargs -n 1 basename \
-                      | grep -v -E '*.pub') )
+                      | grep -v '.pub$' \
+                      | grep -v '^authorized_keys$' \
+                      | grep -v '^known_hosts$' \
+                      | grep -v '^id_rsa$' \
+                      | grep -v '^\.DS_Store$') )
+                      # oh how ugly, multiple greps,
+                      # thanks osx outdated bash
         return 0
         ;;
     *)
