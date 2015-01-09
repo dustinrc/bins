@@ -1,0 +1,14 @@
+#!/bin/bash
+#  Assumes you have ssh keys already setup.
+
+host=$1
+thisport=${2-8000}
+next_host=${3-127.0.0.1}
+thatport=${4-8000}
+
+while true; do
+    echo "Connecting..."
+    ssh -C2qTnN ${host} -L 127.0.0.1:${thisport}:${next_host}:${thatport}
+    echo -e "Disconnected.\n"
+    sleep 30
+done
