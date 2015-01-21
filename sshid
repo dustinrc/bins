@@ -38,6 +38,14 @@ case "${cmd}" in
             exit ${ok}
         fi
         ;;
+    unset)
+        if [ -f ${path} ] && [ ! -L ${path} ]; then
+            echo "${path} exists and is not a link, will not unset"
+            exit ${not_link}
+        else
+            rm ${path}
+        fi
+        ;;
     finger)
         pushd ${ssh_dir} > /dev/null
         ssh-keygen -lf ${tgt}
@@ -46,6 +54,7 @@ case "${cmd}" in
     *)
         echo "  show"
         echo "  set <id>"
+        echo "  unset"
         echo "  finger <id>"
         ;;
 esac

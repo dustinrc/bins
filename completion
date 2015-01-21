@@ -3,7 +3,7 @@ function _sshid() {
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="set show finger"
+    opts="set unset show finger"
 
     case "${prev}" in
     set | finger)
