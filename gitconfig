@@ -1,0 +1,43 @@
+#!/bin/bash
+
+name=${2-"Dustin Chapman"}
+email=${1}
+
+cat << EOF
+[user]
+	name = ${name}
+	email = ${email}
+[color]
+	ui = auto
+	interactive = auto
+[alias]
+	alias = "!f() { git config --global alias.\${1} \"\${2}\"; }; f"
+	aliases = !git config --list | grep alias | cut -c 7-
+	# diff
+	d = diff --color-words
+	dsg = diff --staged --color-words
+	dr = "!f() { git diff --color-words \${1-HEAD}^..\${1-HEAD}; }; f"
+	drr = "!f() { git diff --color-words \${1}..\${2-HEAD}; }; f"
+	dst = "!f() { git diff --stat --color-words \${1-HEAD}^..\${1-HEAD}; }; f"
+	dstr = "!f() { git diff --stat --color-words \${1}..\${2-HEAD}; }; f"
+	# add and unstage
+	a = !git add . && git status
+	au = !git add -u && git status
+	aa = !git add . && git add -u && git status
+	un = !git reset HEAD && git status
+	# status
+	s = status
+	si = status --ignored
+	# commit
+	c = commit
+	cm = commit -m
+	# log
+	glog = log --graph
+	l = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %C(green)%an%C(white), %ar%Creset'
+	ll = log --stat --abbrev-commit
+	# files
+	f = !git ls-tree --full-tree -r HEAD
+	fc = !git ls-tree --full-tree -r HEAD | wc -l
+[core]
+	pager = less -+ -FRX
+EOF
