@@ -6,7 +6,7 @@ cmd=${1-""}
 
 defaultdir="${HOME}/.spf13-vim-3"
 basedir="$(dirname ${defaultdir})"
-toremove="${defaultdir} ${basedir}/.vimrc* ${basedir}/.vimbackup* ${basedir}/.vim-*"
+toremove="${defaultdir} ${basedir}/.vim ${basedir}/.vimrc* ${basedir}/.vimbackup* ${basedir}/.vim-*"
 
 function gotodir() {
     pushd ${defaultdir} > /dev/null
