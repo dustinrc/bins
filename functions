@@ -31,8 +31,11 @@ function truepath()
     pushd $(dirname ${path}) > /dev/null
     path=$(pwd -P)/$(basename ${path})
     if [ -h ${path} ]; then
-        pushd $(dirname $(readlink ${path})) > /dev/null
-        path=$(pwd -P)/$(basename ${path})
+        link=$(readlink ${path})
+        base=$(basename ${link})
+        pardir=$(dirname ${link})
+        pushd ${pardir} > /dev/null
+        path=$(pwd -P)/${base}
         popd > /dev/null
     fi
     popd > /dev/null
