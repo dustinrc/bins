@@ -19,3 +19,22 @@ function randnum()
     fi
     echo $num
 }
+
+function truedir()
+{
+    echo $(dirname $(truepath $1))
+}
+
+function truepath()
+{
+    path=$1
+    pushd $(dirname ${path}) > /dev/null
+    path=$(pwd -P)/$(basename ${path})
+    if [ -h ${path} ]; then
+        pushd $(dirname $(readlink ${path})) > /dev/null
+        path=$(pwd -P)/$(basename ${path})
+        popd > /dev/null
+    fi
+    popd > /dev/null
+    echo ${path}
+}

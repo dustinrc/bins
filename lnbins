@@ -1,6 +1,8 @@
 #!/bin/bash
 
-src=${2-"${HOME}/dev/bins"}
+. $(dirname $0)/functions
+
+src=${2-"$(truedir $0)"}
 dst=${3-"${HOME}/bin"}
 
 mkdir -p ${dst}
