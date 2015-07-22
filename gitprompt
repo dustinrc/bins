@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pushd ${HOME} > /dev/null
+if [ -d .bash-git-prompt ]; then
+    cd .bash-git-prompt
+    git pull
+    popd > /dev/null
+else
+    git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt
+fi

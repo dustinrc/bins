@@ -1,0 +1,11 @@
+# poor dependency -- figure out a better way
+seedpath=$(which lnbins)
+
+. $(dirname ${seedpath})/functions
+
+envdir="$(truedir ${seedpath})/environment.d"
+
+# assuming only files in the directory
+for f in $(ls ${envdir}); do
+    . ${envdir}/${f}
+done
