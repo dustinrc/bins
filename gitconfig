@@ -25,6 +25,8 @@ cat << EOF
 	au = !git add -u && git status
 	aa = !git add . && git add -u && git status
 	un = !git reset HEAD && git status
+	# branches and checkouts
+	bv = branch -avv
 	# status
 	s = status
 	si = status --ignored
