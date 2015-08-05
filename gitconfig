@@ -40,4 +40,9 @@ cat << EOF
 	fc = !git ls-tree --full-tree -r HEAD | wc -l
 [core]
 	pager = less -+ -FRX
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
 EOF
