@@ -27,6 +27,8 @@ cat << EOF
 	un = !git reset HEAD && git status
 	# branches and checkouts
 	bv = branch -avv
+	co = checkout
+	ct = checkout -t
 	# status
 	s = status
 	si = status --ignored
