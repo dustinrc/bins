@@ -29,12 +29,16 @@ cat << EOF
 	bv = branch -avv
 	co = checkout
 	ct = checkout -t
+	del = "!f() { git branch -D \${1} && git push \${2-origin} --delete \${1}; }; f"
+	prune = fetch --all --prune
 	# status
 	s = status
 	si = status --ignored
 	# commit
 	c = commit
 	cm = commit -m
+	# pull and push
+	pn = "!f() { git push -u \${1-origin} \$(git rev-parse --abbrev-ref HEAD); }; f"
 	# log
 	glog = log --graph
 	l = log --graph --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %C(green)%an%C(white), %ar%Creset'
@@ -42,6 +46,9 @@ cat << EOF
 	# files
 	f = !git ls-tree --full-tree -r HEAD
 	fc = !git ls-tree --full-tree -r HEAD | wc -l
+	# server
+	sro = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+	srw = daemon --base-path=. --export-all --enable=receive-pack --reuseaddr --informative-errors --verbose
 [core]
 	pager = less -+ -FRX
 [merge]
