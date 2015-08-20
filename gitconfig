@@ -37,6 +37,7 @@ cat << EOF
 	# commit
 	c = commit
 	cm = commit -m
+	count = rev-list HEAD --count
 	# pull and push
 	pn = "!f() { git push -u \${1-origin} \$(git rev-parse --abbrev-ref HEAD); }; f"
 	# log
