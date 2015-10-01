@@ -1,0 +1,8 @@
+#!/bin/bash
+# Convert hex to IP address to hex.
+# Should be of the form XXXXXXXX, that's 8 hex numbers.
+
+hex_octets=($(echo ${1} | sed 's,\([0-9a-fA-F]\{2\}\),0x\1 ,g'))
+dec_octets=$(printf '%d ' ${hex_octets[@]})
+dec_space_delimited=${dec_octets[@]}
+echo ${dec_space_delimited// /.}

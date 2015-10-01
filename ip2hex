@@ -1,6 +1,5 @@
 #!/bin/bash
 # Convert IP address to hex, most likely for PXE booting.
-# Eventually would like to have a reverse of this.
 
 printf '%02X' ${1//./ }
 echo
