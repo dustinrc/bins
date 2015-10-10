@@ -1,7 +1,7 @@
 #!/bin/bash
 
-name=${2-"Dustin Chapman"}
-email=${1}
+name=${GIT_NAME-"Dustin Chapman"}
+email=${GIT_EMAIL}
 
 cat << EOF
 [user]
