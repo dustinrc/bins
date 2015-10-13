@@ -1,0 +1,27 @@
+function _sshid() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="set unset show finger"
+
+    case "${prev}" in
+    set | finger)
+        COMPREPLY=( $(compgen -f "${HOME}/.ssh/${cur}" \
+                      | xargs -n 1 basename \
+                      | grep -v '.pub$' \
+                      | grep -v '^authorized_keys$' \
+                      | grep -v '^known_hosts$' \
+                      | grep -v '^id_rsa$' \
+                      | grep -v '^\.DS_Store$') )
+                      # oh how ugly, multiple greps,
+                      # thanks osx outdated bash
+        return 0
+        ;;
+    *)
+    ;;
+    esac
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+complete -F _sshid sshid

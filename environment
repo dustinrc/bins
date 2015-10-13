@@ -9,3 +9,6 @@ envdir="$(truedir ${seedpath})/environment.d"
 for f in $(ls ${envdir}); do
     . ${envdir}/${f}
 done
+
+comfile="$(truedir ${envdir})/completion"
+. ${comfile}
