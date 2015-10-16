@@ -1,0 +1,10 @@
+function refresh()
+{
+    if [ -f ${HOME}/.bash_profile ]; then
+        prof=${HOME}/.bash_profile
+    else
+        prof=${HOME}/.bashrc
+    fi
+    echo "Refreshing from '${prof}'"
+    . ${prof}
+}
