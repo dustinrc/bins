@@ -1,9 +1,9 @@
-alias grep="grep --color=always -RHn"
+alias grepp="grep --color=always -RHn"
 
 function grexd()
 {
     excluded=${1}
     pattern=${2}
     search=${3-"*"}
-    grep --exclude-dir=${excluded} ${pattern} ${search}
+    grepp --exclude-dir=${excluded} ${pattern} ${search}
 }
