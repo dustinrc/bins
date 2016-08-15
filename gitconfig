@@ -34,6 +34,14 @@ cat << EOF
 	# status
 	s = status
 	si = status --ignored
+	# stash
+	sts = stash save
+	stsp = stash save --patch
+	stl = stash list
+	stsh = "!f() { git stash show stash^{/$*} --patch --color-words; }; f"
+	sta = "!f() { git stash apply stash^{/$*}; }; f"
+	std = "!f() { git stash drop stash@{${1-0}}; }; f"
+	stp = "!f() { git stash pop stash@{${1-0}}; }; f"
 	# commit
 	c = commit
 	cm = commit -m
