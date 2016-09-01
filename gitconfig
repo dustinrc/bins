@@ -30,7 +30,7 @@ cat << EOF
 	co = checkout
 	ct = checkout -t
 	del = "!f() { git branch -D \${1} && git push \${2-origin} --delete \${1}; }; f"
-    delm = "!f() { git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs -I % sh -c \"git branch -D % && git push \${1-origin} --delete %\"; }; f"
+    delm = "!f() { git branch --merged | egrep -v \"(^\\\\*|master|dev)\" | xargs -I % sh -c \"git branch -D % && git push \${1-origin} --delete %\"; }; f"
 	prune = fetch --all --prune
 	# status
 	s = status
