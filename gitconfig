@@ -38,6 +38,7 @@ cat << EOF
 	# stash
 	sts = stash save
 	stsp = stash save --patch
+	stsu = stash save --include-untracked
 	stl = stash list
 	stsh = "!f() { git stash show stash^{/$*} --patch --color-words; }; f"
 	sta = "!f() { git stash apply stash^{/$*}; }; f"
