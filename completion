@@ -1,8 +1,4 @@
-# poor dependency -- figure out a better way
-seedpath=$(which lnbins)
-
-. $(dirname ${seedpath})/functions
-
+# should have already run environment script
 comdir="$(truedir ${seedpath})/completion.d"
 
 # assuming only files in the directory

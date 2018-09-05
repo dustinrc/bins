@@ -1,7 +1,12 @@
-# poor dependency -- figure out a better way
-seedpath=$(which lnbins)
+seedpath="${BASH_SOURCE}"
+if [ -z ${seedpath} ]; then
+    seedpath=$(which lnbins)
+fi
+# lousy fallback
+seedpathdir=$(dirname ${seedpath})
 
-. $(dirname ${seedpath})/functions
+functions=${seedpathdir}/functions
+. ${functions}
 
 envdir="$(truedir ${seedpath})/environment.d"
 
