@@ -1,0 +1,3 @@
+enable=$(affirmative_rc "which git")
+run="gitconfig"
+link="${HOME}/.gitconfig"

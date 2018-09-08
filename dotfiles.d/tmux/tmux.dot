@@ -1,0 +1,3 @@
+enable=$(affirmative_rc "which tmux")
+copy="${dotdir}/tmux/tmux.conf"
+link="${HOME}/.tmux.conf"

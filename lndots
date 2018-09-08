@@ -1,0 +1,46 @@
+#!/bin/bash
+
+. $(dirname $0)/functions
+dotdir="$(truedir $0)/dotfiles.d"
+dotcache=${1-"${HOME}/.dotcache"}
+stamp=$(date +%Y%m%d%H%M%S)
+
+mkdir -p ${dotcache}
+
+for f in $(find ${dotdir} -type f -name "*.dot"); do
+    (
+        . ${f}
+
+        if (( $(affirmative ${enable}) )); then
+            cachefile=${dotcache}/$(basename ${f}).${stamp}
+
+            if [ ! -z ${run} ]; then
+                echo "Running ${run}..."
+                ${run} > ${cachefile}
+            elif [ ! -z ${copy} ]; then
+                echo "Copying ${copy}..."
+                cp ${copy} ${cachefile}
+            fi
+
+            if [ ! -e ${link} ] && [ -h ${link} ]; then
+                # broken link
+                rm ${link}
+            fi
+
+            if [ -e ${link} ] && [ ! -h ${link} ]; then
+                echo "Skipping ${f} because ${link} is not a link..."
+            elif [ -e ${link} ] && [ -h ${link} ]; then
+                diff ${link} ${cachefile} 2>&1 > /dev/null
+                if_is_diff=$?
+                (( if_is_diff )) \
+                    && (rm ${link}; ln -s ${cachefile} ${link}) \
+                    || rm ${cachefile}
+            else
+                ln -s ${cachefile} ${link}
+            fi
+
+        else
+            echo "Skipping ${f}..."
+        fi
+    )
+done

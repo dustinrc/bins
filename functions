@@ -1,3 +1,28 @@
+function affirmative()
+{
+    case "$1" in
+        y|yes|t|true|1)
+            echo 1
+            ;;
+    *)
+        echo 0
+        ;;
+    esac
+}
+
+function affirmative_rc()
+{
+    $1 2>&1 > /dev/null
+    case "$?" in
+        0)
+            echo 1
+            ;;
+        *)
+            echo 0
+            ;;
+    esac
+}
+
 function randstr()
 {
     cat /dev/urandom | tr -dc ${2:-'a-zA-Z0-9'} | fold -w ${1:-32} | head -n 1
