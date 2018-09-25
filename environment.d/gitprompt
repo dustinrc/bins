@@ -11,5 +11,10 @@ if [ -f ${HOME}/.bash-git-prompt/gitprompt.sh ]; then
     # GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
     # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
 
+    GIT_PROMPT_THEME=Solarized
+    if [ -f /etc/lsb-release ]; then
+        GIT_PROMPT_THEME=${GIT_PROMPT_THEME-Default}_Ubuntu
+    fi
+
     . ~/.bash-git-prompt/gitprompt.sh
 fi
