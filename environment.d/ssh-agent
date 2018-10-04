@@ -1,0 +1,15 @@
+sa_cmd=$(which ssh-agent)
+
+dflt_sa_sock="/tmp/sa_$(whoami)_$(hostname -s)"
+
+if [ -n "${sa_cmd}" ]; then
+    if [ -n "${SSH_AUTH_SOCK}" ] && [ -S ${SSH_AUTH_SOCK} ]; then
+        echo "Using existing SSH agent at ${SSH_AUTH_SOCK}"
+    elif [ -S ${dflt_sa_sock} ]; then
+        echo "Using default socket for SSH agent at ${dflt_sa_sock}"
+        export SSH_AUTH_SOCK=${dflt_sa_sock}
+    else
+        echo "Starting new SSH agent..."
+        eval $(ssh-agent -a ${dflt_sa_sock})
+    fi
+fi
