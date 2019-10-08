@@ -13,3 +13,10 @@ if [ -n "${sa_cmd}" ]; then
         eval $(ssh-agent -a ${dflt_sa_sock})
     fi
 fi
+
+function load_ssh_keys()
+{
+    grep -Rls PRIVATE ${HOME}/.ssh | xargs ssh-add -q
+}
+
+load_ssh_keys
