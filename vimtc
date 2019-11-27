@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # vimtc -- vim tab the code
 
 ext=${1-go}

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Convert hex to IP address to hex.
 # Should be of the form XXXXXXXX, that's 8 hex numbers.
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # repo should include username, i.e. nf/sigourney
 
 repo=${1}

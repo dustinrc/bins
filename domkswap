@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #  This helps the OOMKiller issues with small DigitalOcean VPS
 
 dd if=/dev/zero of=/swapfile bs=1024 count=1048576

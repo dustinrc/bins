@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ $# -eq 0 ]]; then
     echo "Uninstall a homebrew formula and any remaining unused dependencies."

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # remove exited containers
 
 docker ps -a | \
