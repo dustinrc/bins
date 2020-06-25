@@ -23,6 +23,11 @@ function affirmative_rc()
     esac
 }
 
+function echo_i()
+{
+    [[ $- == *i* ]] && echo "$1"
+}
+
 function randstr()
 {
     cat /dev/urandom | tr -dc ${2:-'a-zA-Z0-9'} | fold -w ${1:-32} | head -n 1
