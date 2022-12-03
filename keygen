@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-remote=${1-""}
-name=${2-`whoami`}
-location=${3-`hostname -s`}
-directory=${4-"${HOME}/.ssh"}
+: ${TYPE:="ed25519"}
+# ignored unless TYPE is rsa
+: ${BITS:="4096"}
+
+: ${REMOTE:=""}
+: ${NAME:="$(whoami)"}
+: ${LOCATION:="$(hostname -s)"}
+: ${DIRECTORY:="${HOME}/.ssh"}
 
 read -s -p "Passphrase: " passphrase; echo
 read -s -p "Retype passphrase: " repassphrase; echo
@@ -14,21 +18,18 @@ elif [ ${passphrase} != ${repassphrase} ]; then
     exit 1
 fi
 
-[ ${location} ] \
-    && description="${name}@${location}" \
-    || description="${name}"
-output="${directory}/${description}"
+[ ${LOCATION} ] \
+    && description="${NAME}@${LOCATION}" \
+    || description="${NAME}"
+output="${DIRECTORY}/${description}"
 puboutput="${output}.pub"
-
-bits=4096
-type="rsa"
 
 [ -f ${puboutput} ] \
     && echo "key already exists" \
-    || ssh-keygen -b ${bits} -t ${type} -P "${passphrase}" -C "${description}" -f "${output}"
+    || ssh-keygen -b ${BITS} -t ${TYPE} -P "${passphrase}" -C "${description}" -f "${output}"
 
-[ ${remote} ] && [ `which ssh-copy-id` ] \
-    && ssh-copy-id -i ${puboutput} ${remote} \
+[ ${REMOTE} ] && [ `which ssh-copy-id` ] \
+    && ssh-copy-id -i ${puboutput} ${REMOTE} \
     || echo "cannot copy to remote"
 
-echo "To use your key: 'ssh -i ${output} ${remote}'"
+echo "To use your key: 'ssh -i ${output} ${REMOTE}'"
