@@ -23,9 +23,31 @@ function affirmative_rc()
     esac
 }
 
+function cmdwalkhomehere()
+{
+    origdir="$(pwd)"
+    until [ "$(pwd)" == "${HOME}" ]; do
+        pushd .. > /dev/null
+    done
+
+    until [ "$(pwd)" == "${origdir}" ]; do
+        # home or intermediate directory
+        $@
+        popd > /dev/null
+    done
+
+    # original directory
+    $@
+}
+
 function echo_i()
 {
     [[ $- == *i* ]] && echo "$1"
+}
+
+function envwalk()
+{
+    cmdwalkhomehere $'eval [[ -e .env ]] && source .env'
 }
 
 function randstr()
@@ -71,3 +93,4 @@ function truepath()
     popd > /dev/null
     echo ${path}
 }
+
