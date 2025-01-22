@@ -47,7 +47,9 @@ function echo_i()
 
 function envwalk()
 {
-    cmdwalkhomehere $'eval [[ -e .env ]] && source .env'
+    for ef in $(cmdwalkhomehere $'eval [[ -e .env ]] && truepath .env || true'); do
+        source ${ef}
+    done
 }
 
 function randstr()
