@@ -8,7 +8,6 @@ seedpathdir=$(dirname ${seedpath})
 functions=${seedpathdir}/functions
 . ${functions}
 
-envwalk
 envdir="$(truedir ${seedpath})/environment.d"
 
 # assuming only files in the directory
