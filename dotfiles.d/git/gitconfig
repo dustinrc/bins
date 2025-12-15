@@ -25,7 +25,7 @@
 	ct = checkout -t
 	del = "!f() { git branch -D ${1} && git push ${2-origin} --delete ${1}; }; f"
 	delm = "!f() { git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs -I % sh -c \"git branch -D % && git push ${1-origin} --delete %\"; }; f"
-	prune = fetch --all --prune
+	pr = "!f() { echo 'fetch' && git fetch --all --prune -v && echo 'remote' && git remote update --prune && echo 'prune' && git prune -v; }; f"
 	# status
 	s = status
 	si = status --ignored
