@@ -41,3 +41,6 @@ Session.vim
 .netrwhist
 *~
 
+### environment.d ###
+.env
+environment.d/*local*
